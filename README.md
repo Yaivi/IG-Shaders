@@ -1,6 +1,7 @@
 # IG-Shaders
 
-##
+## Shaders en prácticas anteriores
+He aplicado el shader de doble textura en la práctica del modelo del Sistema Solar. Consiguiendo que en el planeta Tierra dependiendo de la luz, se muestre en la superficie de este la textura del planeta de día o la textura de la noche con las luces de las ciudades. Para que no fuese un corte completo he decidido no usar una estrcutura de if/else, y en cambio se ha usado un 
 
 ## Shaders de fragmentos
 En esta parte se detalla el desarrollo de los shaders de patrones generativos ejecutables en The Book of Shaders.
