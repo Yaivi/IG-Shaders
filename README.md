@@ -1,7 +1,32 @@
 # IG-Shaders
 
 ## Shaders en prácticas anteriores
-He aplicado el shader de doble textura en la práctica del modelo del Sistema Solar. Consiguiendo que en el planeta Tierra dependiendo de la luz, se muestre en la superficie de este la textura del planeta de día o la textura de la noche con las luces de las ciudades. Para que no fuese un corte completo he decidido no usar una estrcutura de if/else, y en cambio se ha usado un 
+He aplicado el shader de doble textura en la práctica del modelo del Sistema Solar. Consiguiendo que en el planeta Tierra dependiendo de la luz, se muestre en la superficie de este la textura del planeta de día o la textura de la noche con las luces de las ciudades. Para que no fuese un corte completo he decidido no usar una estrcutura de if/else, y en cambio se ha usado una serie de funciones para hacer una mezcla de las dos texturas.
+
+![Gif de la Tierra](https://raw.githubusercontent.com/Yaivi/IG-Shaders/main/Tierra_video.gif)
+
+Los principales cambios con respecto al shader que nos explicaron en clase es el uso de un coeficiente de mezcla, que se se usará para juntar las 2 texturas en los diferentes puntos de la superficie. Para obtner el factor se coge el valor de LdotN si este es positivo y 0 en caso de que sea negativo, tras esto, eleva el valor de LdotN a 1, pues se ha considerado que el resultado con este valor como potencia es mejor, por último clamp se asegura de que el valor esté entre 0 y 1, que son los valores que maneja la función mix. 
+
+```
+        uniform sampler2D texture1;
+        uniform sampler2D texture2;
+        varying vec2 vUv;
+        varying vec3 v_Luz;
+        varying vec3 v_Normal;
+
+        void main() {
+            float LdotN = dot(v_Luz, v_Normal);
+            float factor = clamp(pow(max(LdotN, 0.0), 1.0), 0.0, 1.0);
+            vec3 color = mix(texture2D(texture2, vUv).rgb, texture2D(texture1, vUv).rgb, factor);
+            gl_FragColor = vec4(color, 1.0);
+
+          }
+```
+
+Una vez obtenido el valor se mezclan ambas texturas, de esta forma cuando el coeficiente sea 0, solo se verá la textura nocturna, y cuando sea 1 la diurna, en cambio en los límites entre ambas, se mezclaran ambas con diferente intensidad. Así se puede observar como las luces en los países se van encendiendo y apagando al entrar y salir de la cara no iluminada por el sol.
+
+
+**ENLACE A CÓDIGO:** https://codesandbox.io/p/sandbox/entrega-shaders-fhf7vx?file=%2Fsrc%2Fsistema_solar.js%3A744%2C8-755%2C33
 
 ## Shaders de fragmentos
 En esta parte se detalla el desarrollo de los shaders de patrones generativos ejecutables en The Book of Shaders.
