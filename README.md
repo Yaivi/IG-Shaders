@@ -7,7 +7,7 @@ He aplicado el shader de doble textura en la práctica del modelo del Sistema So
 En esta parte se detalla el desarrollo de los shaders de patrones generativos ejecutables en The Book of Shaders.
 
 ### Efecto Caleidoscópico
-![Gif del primer shader](https://github.com/Yaivi/IG-Shaders/blob/main/Caleidoscopio.gif)
+![Gif del primer shader](https://raw.githubusercontent.com/Yaivi/IG-Shaders/main/Caleidoscopio.gif)
 ```
 uniform vec2 u_resolution; uniform float u_time;
 void main(){
@@ -45,7 +45,7 @@ gl_FragColor=vec4(col,1.0);
 Finalmente, ambas capas se combinan y se envían a la pantalla con gl_FragColor. La línea final no crea el efecto; el efecto nace de cómo las matemáticas polares (radio y ángulo) se convierten en ondas, y cómo esas ondas generan formas animadas y fluidas.
 
 ### Hélice Psicodélica
-![Gif del segundo shader] (https://github.com/Yaivi/IG-Shaders/blob/main/H%C3%A9lice_psicodelica.gif)
+![Gif del segundo shader](https://raw.githubusercontent.com/Yaivi/IG-Shaders/main/H%C3%A9lice_psicodelica.gif)
 ```
 uniform vec2 u_resolution;uniform float u_time;
 void main(){
