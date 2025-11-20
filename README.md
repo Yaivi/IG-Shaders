@@ -7,7 +7,7 @@ He aplicado el shader de doble textura en la práctica del modelo del Sistema So
 En esta parte se detalla el desarrollo de los shaders de patrones generativos ejecutables en The Book of Shaders.
 
 ### Efecto Caleidoscópico
-
+[Gif del primer shader](https://github.com/Yaivi/IG-Shaders/blob/main/Caleidoscopio.gif)
 ```
 uniform vec2 u_resolution; uniform float u_time;
 void main(){
@@ -45,6 +45,7 @@ gl_FragColor=vec4(col,1.0);
 Finalmente, ambas capas se combinan y se envían a la pantalla con gl_FragColor. La línea final no crea el efecto; el efecto nace de cómo las matemáticas polares (radio y ángulo) se convierten en ondas, y cómo esas ondas generan formas animadas y fluidas.
 
 ### Hélice Psicodélica
+[Gif del segundo shader] (https://github.com/Yaivi/IG-Shaders/blob/main/H%C3%A9lice_psicodelica.gif)
 ```
 uniform vec2 u_resolution;uniform float u_time;
 void main(){
@@ -56,5 +57,12 @@ void main(){
  gl_FragColor=vec4(c,1.);
 }
 ```
+Al igual que el anterior shader, este comienza normalizando el espacio de trabajo. A continuación, se calcula el ángulo polar de cada píxel mediante float a = atan(st.y, st.x) + u_time * 0.3;. La función atan devuelve la dirección angular del píxel desde el centro, mientras que la suma de u_time * 0.3 introduce animación rotacional. Esto genera un efecto de giro constante, haciendo que el patrón se mueva y cambie de forma con el tiempo, como si una hélice estuviera rotando.
+
+El shader también calcula la distancia radial float r = length(st);, que indica qué tan lejos está cada píxel del centro. Este valor se combina con el ángulo para crear la onda helicoidal float v = sin(12.*r + a*6.);.
+
+Los colores se definen manipulando los tres canales de manera independiente: vec3 c = vec3(0.5 + 0.5*sin(a + v), 0.4 + 0.6*v, 0.6 - 0.5*sin(a));. El canal rojo depende de la combinación de ángulo y onda, el verde varía según la onda, y el azul depende del ángulo. Esta separación de canales produce un efecto psicodélico, con espirales de color que cambian de forma y se mezclan dinámicamente a medida que el patrón gira.
+
+Finalmente, la línea gl_FragColor = vec4(c,1.); envía el color calculado al fragmento correspondiente. Todo el efecto visual surge de las matemáticas polares y las ondas seno, junto con la animación temporal proporcionada por u_time. El resultado es una hélice colorida y psicodélica que rota y pulsa, generando un patrón generativo atractivo.
 
 
