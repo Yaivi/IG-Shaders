@@ -1,12 +1,10 @@
 # IG-Shaders
-
 ## Shaders en prácticas anteriores
-
-He aplicado el shader de doble textura en la práctica del modelo del Sistema Solar. Consiguiendo que en el planeta Tierra, dependiendo de la luz, se muestre en la superficie de este la textura del planeta de día o la textura de la noche con las luces de las ciudades. Para que no fuese un corte completo, he decidido no usar una estructura de if/else, y en cambio se ha usado una serie de funciones para hacer una mezcla de las dos texturas.
+He aplicado el shader de doble textura en la práctica del modelo del Sistema Solar. Consiguiendo que en el planeta Tierra, dependiendo de la luz, se muestre en la superficie de este la textura del planeta de día o la textura de la noche con las luces de las ciudades. Para que no fuese un corte completo, he decidido no usar una estructura de if/else, y en cambio se ha usado una serie de funciones para hacer una mezcla de las dos texturas en el fragmentShader.
 
 ![Gif de la Tierra](https://raw.githubusercontent.com/Yaivi/IG-Shaders/main/Tierra_video.gif)
 
-Los principales cambios con respecto al shader que nos explicaron en clase son el uso de un coeficiente de mezcla, que se usará para juntar las 2 texturas en los diferentes puntos de la superficie. Para obtener el factor, se coge el valor de LdotN si este es positivo y 0 en caso de que sea negativo. Tras esto, eleva el valor de LdotN a 1, pues se ha considerado que el resultado con este valor como potencia es mejor. Por último, clamp se asegura de que el valor esté entre 0 y 1, que son los valores que maneja la función mix. 
+El cambio con respecto al shader que nos explicaron en clase es el uso de un coeficiente de mezcla, que se usará para juntar las 2 texturas en los diferentes puntos de la superficie. Para obtener el factor, se coge el valor de LdotN si este es positivo y 0 en caso de que sea negativo. Tras esto, eleva el valor de LdotN a 1, pues se ha considerado que el resultado con este valor como potencia es mejor. Por último, clamp se asegura de que el valor esté entre 0 y 1, que son los valores que maneja la función mix. 
 
 ```
 
@@ -36,7 +34,7 @@ Los principales cambios con respecto al shader que nos explicaron en clase son e
 
 Una vez obtenido el valor, se mezclan ambas texturas, de esta forma, cuando el coeficiente sea 0, solo se verá la textura nocturna, y cuando sea 1, la diurna, en cambio en los límites entre ambas, se mezclarán ambas con diferente intensidad. Así se puede observar cómo las luces en los países se van encendiendo y apagando al entrar y salir de la cara no iluminada por el sol.
 
-ENLACE A CÓDIGO: https://codesandbox.io/p/sandbox/entrega-shaders-fhf7vx?file=%2Fsrc%2Fsistema_solar.js%3A744%2C8-755%2C33
+**ENLACE A CÓDIGO:** https://codesandbox.io/p/sandbox/entrega-shaders-fhf7vx?file=%2Fsrc%2Fsistema_solar.js%3A744%2C8-755%2C33
 
 ## Shaders de fragmentos
 
